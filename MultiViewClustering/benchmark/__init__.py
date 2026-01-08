@@ -1,0 +1,15 @@
+from .benchmark_traditional import benchmark_2011_AAAI_LSC
+from .benchmark_traditional import benchmark_2011_JMLR_SKLEARN_KMeans
+from .benchmark_traditional import benchmark_2011_JMLR_SKLEARN_MiniBatchKMeans
+from .benchmark_traditional import benchmark_2011_JMLR_SKLEARN_SpectralClustering
+from .benchmark_traditional import benchmark_2011_JMLR_SKLEARN_AgglomerativeClustering
+from .benchmark_traditional import benchmark_2011_JMLR_SKLEARN_Birch
+from .benchmark_traditional import benchmark_2011_JMLR_SKLEARN_GaussianMixture
+
+from .benchmark_dec import benchmark_2016_PMLR_DEC
+from .benchmark_dec import benchmark_2017_IJCAI_IDEC
+from .benchmark_dec import benchmark_2021_INSC_DEMVC
+from .benchmark_dec import benchmark_2021_INSC_DEMVC_NC
+from .benchmark_dec import benchmark_2022_TKDE_SDMVC
+from .benchmark_dec import benchmark_2024_CVPR_MVCAN
+from .benchmark_dec import benchmark_2026_JBHI_HDUMEC
