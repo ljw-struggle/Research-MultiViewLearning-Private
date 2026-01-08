@@ -1,0 +1,4 @@
+arch/
+data/
+logs/
+__pycache__/
