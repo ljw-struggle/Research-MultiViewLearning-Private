@@ -1,0 +1,103 @@
+arch/
+data/
+result/
+__pycache__/
+2023_NIPS_SEM.pdf
+
+
+ython train.py 
+/home/amax/lijiawei/Research-MultiViewLearning-Private/MultiViewClustering/benchmark/benchmark_con/2023_NIPS_SEM/arch/SEM/train.py:156: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+  if xnum == args.batch_size and epoch is not 1:
+/home/amax/lijiawei/Research-MultiViewLearning-Private/MultiViewClustering/benchmark/benchmark_con/2023_NIPS_SEM/arch/SEM/train.py:158: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+  if xnum is not args.batch_size and epoch is not 1:
+/home/amax/lijiawei/Research-MultiViewLearning-Private/MultiViewClustering/benchmark/benchmark_con/2023_NIPS_SEM/arch/SEM/train.py:252: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+  if xnum == args.batch_size and epoch is not 1:
+/home/amax/lijiawei/Research-MultiViewLearning-Private/MultiViewClustering/benchmark/benchmark_con/2023_NIPS_SEM/arch/SEM/train.py:254: SyntaxWarning: "is not" with 'int' literal. Did you mean "!="?
+  if xnum is not args.batch_size and epoch is not 1:
+/home/amax/lijiawei/Research-MultiViewLearning-Private/MultiViewClustering/benchmark/benchmark_con/2023_NIPS_SEM/arch/SEM/metric.py:206: SyntaxWarning: "is not" with 'str' literal. Did you mean "!="?
+  if eval_h and Measure is not 'CMI':
+/home/amax/lijiawei/Research-MultiViewLearning-Private/MultiViewClustering/benchmark/benchmark_con/2023_NIPS_SEM/arch/SEM/metric.py:264: SyntaxWarning: "is not" with 'str' literal. Did you mean "!="?
+  if eval_z and Measure is not 'CMI':
+/home/amax/lijiawei/Research-MultiViewLearning-Private/MultiViewClustering/benchmark/benchmark_con/2023_NIPS_SEM/arch/SEM/metric.py:284: SyntaxWarning: "is not" with 'str' literal. Did you mean "!="?
+  if test or Measure is not 'CMI':
+SEM + InfoNCE + CMI + AE
+ROUND:1
+(1400, 48)
+(1400, 40)
+(1400, 254)
+(1400, 1984)
+(1400, 512)
+(1400, 928)
+Initialization......
+Clustering results on each view (H^v):
+ACC1 = 0.3557 NMI1 = 0.2232 ARI1 = 0.1260 PUR1=0.3707
+ACC2 = 0.4550 NMI2 = 0.3665 ARI2 = 0.2804 PUR2=0.5100
+ACC3 = 0.5593 NMI3 = 0.3590 ARI3 = 0.2820 PUR3=0.5593
+ACC4 = 0.8664 NMI4 = 0.7791 ARI4 = 0.7477 PUR4=0.8664
+ACC5 = 0.7636 NMI5 = 0.6363 ARI5 = 0.5944 PUR5=0.7636
+ACC6 = 0.5493 NMI6 = 0.4672 ARI6 = 0.3551 PUR6=0.5900
+Mean = 0.5915 Mean = 0.4719 Mean = 0.3976 Mean=0.6100
+Clustering results on all views ([H^1...H^V]): 1400
+ACC = 0.8471 NMI = 0.7430 ARI = 0.7068 PUR=0.8471
+[[1.71828183 0.21748557 0.17220216 0.22084109 0.24191514 0.18452243]
+ [0.21748557 1.71828183 0.22450942 0.39408797 0.34474912 0.31161595]
+ [0.17220216 0.22450942 1.71828183 0.41753472 0.33914586 0.53341123]
+ [0.22084109 0.39408797 0.41753472 1.71828183 0.83346934 0.60780754]
+ [0.24191514 0.34474912 0.33914586 0.83346934 1.71828183 0.4915704 ]
+ [0.18452243 0.31161595 0.53341123 0.60780754 0.4915704  1.71828183]]
+Self-Weighted Multi-view Contrastive Learning with Reconstruction Regularization...
+Iteration 1:
+Clustering results on each view (Z^v):
+ACC1 = 0.7379 NMI1 = 0.5959 ARI1 = 0.5441 PUR1=0.7379
+ACC2 = 0.8271 NMI2 = 0.7386 ARI2 = 0.6912 PUR2=0.8271
+ACC3 = 0.8357 NMI3 = 0.7347 ARI3 = 0.7021 PUR3=0.8357
+ACC4 = 0.8529 NMI4 = 0.7683 ARI4 = 0.7381 PUR4=0.8529
+ACC5 = 0.8436 NMI5 = 0.7600 ARI5 = 0.7263 PUR5=0.8436
+ACC6 = 0.8350 NMI6 = 0.7279 ARI6 = 0.6991 PUR6=0.8350
+Mean = 0.8220 Mean = 0.7209 Mean = 0.6835 Mean=0.8220
+Clustering results on all views ([Z^1...Z^V]): 1400
+ACC = 0.8457 NMI = 0.7604 ARI = 0.7232 PUR=0.8457
+[[1.71828183 0.93511052 0.90354753 0.92446537 0.93904257 0.88232738]
+ [0.93511052 1.71828183 1.1262473  1.17865317 1.21888094 1.10200342]
+ [0.90354753 1.1262473  1.71828183 1.31899873 1.2854527  1.29022269]
+ [0.92446537 1.17865317 1.31899873 1.71828183 1.44433554 1.30289293]
+ [0.93904257 1.21888094 1.2854527  1.44433554 1.71828183 1.24661484]
+ [0.88232738 1.10200342 1.29022269 1.30289293 1.24661484 1.71828183]]
+Iteration 2:
+Clustering results on each view (Z^v):
+ACC1 = 0.8471 NMI1 = 0.7551 ARI1 = 0.7189 PUR1=0.8471
+ACC2 = 0.8621 NMI2 = 0.7904 ARI2 = 0.7483 PUR2=0.8621
+ACC3 = 0.8671 NMI3 = 0.7972 ARI3 = 0.7563 PUR3=0.8671
+ACC4 = 0.8614 NMI4 = 0.7909 ARI4 = 0.7459 PUR4=0.8614
+ACC5 = 0.8686 NMI5 = 0.7993 ARI5 = 0.7582 PUR5=0.8686
+ACC6 = 0.8700 NMI6 = 0.7959 ARI6 = 0.7587 PUR6=0.8700
+Mean = 0.8627 Mean = 0.7881 Mean = 0.7477 Mean=0.8627
+Clustering results on all views ([Z^1...Z^V]): 1400
+ACC = 0.8679 NMI = 0.7978 ARI = 0.7570 PUR=0.8679
+[[1.71828183 1.42580082 1.43191882 1.43040849 1.43904061 1.38057401]
+ [1.42580082 1.71828183 1.55051081 1.54606633 1.56291341 1.50926222]
+ [1.43191882 1.55051081 1.71828183 1.59754435 1.62288622 1.54908779]
+ [1.43040849 1.54606633 1.59754435 1.71828183 1.55795112 1.54120321]
+ [1.43904061 1.56291341 1.62288622 1.55795112 1.71828183 1.55787187]
+ [1.38057401 1.50926222 1.54908779 1.54120321 1.55787187 1.71828183]]
+Iteration 3:
+Clustering results on each view (Z^v):
+ACC1 = 0.8671 NMI1 = 0.7815 ARI1 = 0.7493 PUR1=0.8671
+ACC2 = 0.8714 NMI2 = 0.8034 ARI2 = 0.7629 PUR2=0.8714
+ACC3 = 0.8743 NMI3 = 0.8018 ARI3 = 0.7649 PUR3=0.8743
+ACC4 = 0.8743 NMI4 = 0.8058 ARI4 = 0.7654 PUR4=0.8743
+ACC5 = 0.8743 NMI5 = 0.8019 ARI5 = 0.7664 PUR5=0.8743
+ACC6 = 0.8707 NMI6 = 0.7964 ARI6 = 0.7627 PUR6=0.8707
+Mean = 0.8720 Mean = 0.7985 Mean = 0.7619 Mean=0.8720
+Clustering results on all views ([Z^1...Z^V]): 1400
+ACC = 0.8764 NMI = 0.8018 ARI = 0.7672 PUR=0.8764
+[[1.71828183 1.47752298 1.48054731 1.46057168 1.49766808 1.41305763]
+ [1.47752298 1.71828183 1.58822033 1.58625301 1.57639632 1.49407546]
+ [1.48054731 1.58822033 1.71828183 1.63634976 1.60577373 1.49123041]
+ [1.46057168 1.58625301 1.63634976 1.71828183 1.59939667 1.51062332]
+ [1.49766808 1.57639632 1.60577373 1.59939667 1.71828183 1.52900071]
+ [1.41305763 1.49407546 1.49123041 1.51062332 1.52900071 1.71828183]]
+Time cost: 636.5866174697876
+End......
+[np.float64(0.8764285714285714)] 87.64285714285714 0.0
+[0.8017811900573628] 80.17811900573628 0.0

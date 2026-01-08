@@ -1,0 +1,3 @@
+- https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/tree/master
+- https://github.com/aitorzip/PyTorch-CycleGAN
+- https://hardikbansal.github.io/CycleGANBlog/
