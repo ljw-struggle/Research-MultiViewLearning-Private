@@ -1,0 +1,88 @@
+batch_size: 100
+best_loss_term: tot
+checkpoint_interval: 50
+dataset_config:
+  label_counts: null
+  n_samples: null
+  name: blobs_overlap
+  noise_sd: null
+  noise_views: null
+  select_labels: null
+  select_views: null
+eval_interval: 5
+model_cfg:
+  attention_config:
+    mlp_config:
+      activation: null
+      input_size: null
+      layers: !!python/tuple
+      - 100
+      - 50
+      use_bias: true
+      use_bn: false
+    n_views: 2
+    tau: 10.0
+  backbone_configs: !!python/tuple
+  - activation: relu
+    input_size: !!python/tuple
+    - 2
+    layers: !!python/tuple
+    - 32
+    - 32
+    - 32
+    use_bias: true
+    use_bn: false
+  - activation: relu
+    input_size: !!python/tuple
+    - 2
+    layers: !!python/tuple
+    - 32
+    - 32
+    - 32
+    use_bias: true
+    use_bn: false
+  clip_norm: 0.5
+  cm_config:
+    n_clusters: 3
+    n_hidden: 100
+    use_bn: true
+  discriminator_config:
+    mlp_config:
+      activation: relu
+      input_size: null
+      layers: !!python/tuple
+      - 32
+      - 32
+      - 32
+      use_bias: true
+      use_bn: false
+  fusion_config: null
+  loss_config:
+    funcs: ddc_1|ddc_2_flipped|ddc_3|att|gen|disc
+    gamma: 10
+    n_clusters: 3
+    rel_sigma: 0.15
+    weights: null
+  optimizer_config:
+    betas_att: !!python/tuple
+    - 0.95
+    - 0.999
+    betas_backbones: !!python/tuple
+    - 0.95
+    - 0.999
+    betas_clustering_module: !!python/tuple
+    - 0.95
+    - 0.999
+    betas_disc: !!python/tuple
+    - 0.5
+    - 0.999
+    lr_att: 0.0001
+    lr_backbones: 0.0002
+    lr_clustering_module: 1.0e-05
+    lr_disc: 1.0e-05
+  t: 1
+  t_disc: 1
+n_epochs: 5
+n_eval_samples: null
+n_runs: 1
+patience: 1000000000.0
