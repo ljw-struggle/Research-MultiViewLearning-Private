@@ -1,0 +1,71 @@
+{
+    "name": "debug_deepmix",
+
+    "seed": 8,
+    "n_gpu": 1,
+    "save_dir": "../result/_debug",
+
+    "model": {
+        "type": "GRNInfer_Mix",
+        "args": {
+            "graph_model_args":{
+                "input_dim": 378,
+                "embed_dim": 64,
+                "aggregation_mode": "GAT",
+                "architecture": "multi_layer"
+            },
+            "branch_model_args":{
+                "feature": "bert",
+                "rnn_mode": "LSTM",
+                "rnn_layer": 3,
+                "rnn_bidirection": true
+            },
+            "branch_model_resume_path": "../result/SequenceModel_PreTrain/species_specific_data/HomoSapiens/bert_LSTM_3_true_BinaryCrossEntropy/ORIGIN/model/model_best.pth",
+            "fusion_method": "mmdynamics",
+            "dropout_rate": 0.0,
+            "loss_cls_coeff": 1.0,
+            "loss_conf_coeff": 1.0
+        }
+    },
+    "criterion": {
+        "type": "CrossEntropy",
+        "args": {
+            "weight": [1, 30]
+        }
+    },
+    "lr_scheduler": {
+        "type": "StepLR",
+        "args": {
+            "step_size": 1,
+            "gamma": 0.98
+        }
+    },
+    "optimizer": {
+        "type": "Adam",
+        "args":{
+            "lr": 0.001,
+            "weight_decay": 0,
+            "amsgrad": true
+        }
+    },
+    "loader": {
+        "type": "Cell_Type_Specific_Loader",
+        "args":{
+            "batch_size": 256,
+            "shuffle": true,
+            "num_workers": 2,
+            "feature": "bert",
+            "data": "CLP"
+        }
+    },
+    "metrics": ["accuracy", "precision", "recall", "f1"],
+    "trainer": {
+        "verbosity": 2,
+
+        "epochs": 100,
+        "monitor": "min val_loss",
+        "early_stop": 5,
+
+        "tensorboard": true
+    }
+}

@@ -1,0 +1,157 @@
+# -*- coding: utf-8 -*-
+import os
+import time
+import random
+import argparse
+
+import numpy as np
+import pandas as pd
+import scipy.sparse as sp
+
+import torch
+import torch.nn.functional as F
+from torch.optim import Adam
+from torch.optim.lr_scheduler import StepLR
+from torch.utils.data import DataLoader, TensorDataset
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score
+
+from model import CNNC
+from loader import CNNC_Data
+from utils import calculate_auroc, calculate_aupr, calculate_ep, profile
+from sklearn.metrics import roc_auc_score,average_precision_score
+
+
+def main(data_path, result_path, cell, size):
+    # Load the training, validation and test set
+    exp_file = os.path.join(data_path, 'expression.csv')
+    train_file = os.path.join(data_path, 'train_set.csv')
+    val_file = os.path.join(data_path, 'val_set.csv')
+    test_file = os.path.join(data_path, 'test_set.csv')
+    train_dataset = CNNC_Data(exp_file=exp_file, data_file=train_file, data_cell=cell, data_size=size)
+    val_dataset = CNNC_Data(exp_file=exp_file, data_file=val_file, data_cell=cell, data_size=1)
+    test_dataset = CNNC_Data(exp_file=exp_file, data_file=test_file, data_cell=cell, data_size=1)
+    train_dataloader = DataLoader(train_dataset, batch_size=256, shuffle=True, num_workers=8)
+    val_dataloader = DataLoader(val_dataset, batch_size=256, shuffle=False, num_workers=8)
+    test_dataloader = DataLoader(test_dataset, batch_size=256, shuffle=False, num_workers=8)
+
+    # Define model, optimizer and scheduler
+    model = CNNC()
+    criterion = torch.nn.CrossEntropyLoss()
+    optimizer = Adam(model.parameters(), lr=3e-4, weight_decay=1e-5)
+    scheduler = StepLR(optimizer, step_size=1, gamma=0.99)
+
+    # For Training and Validation
+    device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+    model = model.to(device)
+
+    print('Training and Validation')
+    patience = 0
+    best_val_loss = np.inf
+    for epoch in range(1, 201):
+        model.train()
+        time_start = time.time()
+        train_loss_total = 0
+        train_sample_total = 0
+        for train_data, train_label in train_dataloader:
+            train_data = train_data.to(device) # (batch_size, seq_len, input_dim)
+            train_label = train_label.to(device) # (batch_size, 1)
+            train_pred = model(train_data)
+            train_loss = criterion(train_pred, train_label)
+            optimizer.zero_grad()
+            train_loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=10) # Gradient Clipping
+            optimizer.step()
+            scheduler.step()
+
+            train_loss_total = train_loss_total + train_loss.item() * train_data.size(0)
+            train_sample_total = train_sample_total + train_data.size(0)
+
+        train_loss = train_loss_total / train_sample_total
+
+        model.eval()
+        val_loss_total = 0
+        val_sample_total = 0
+        with torch.no_grad():
+            for val_data, val_label in val_dataloader:
+                val_data = val_data.to(device)
+                val_label = val_label.to(device)
+                val_pred = model(val_data)
+                val_loss = criterion(val_pred, val_label)
+
+                val_loss_total = val_loss_total + val_loss.item() * val_data.size(0)
+                val_sample_total = val_sample_total + val_data.size(0)
+
+        val_loss = val_loss_total / val_sample_total
+
+        if val_loss < best_val_loss:
+            best_val_loss = val_loss
+            torch.save(model.state_dict(), os.path.join(result_path, 'model.pkl'))
+            patience = 0
+        else:
+            patience += 1
+            if patience >= 10:
+                break
+        
+        time_end = time.time()
+        duration = time_end - time_start
+        print('Epoch: {:03d}'.format(epoch), 'Train Loss: {:.3F}'.format(train_loss), 'Val Loss: {:.3F}'.format(val_loss), 'Duration: {:.3F}'.format(duration), flush=True)
+        
+
+    # For Test
+    print('Test')
+    model.load_state_dict(torch.load(os.path.join(result_path, 'model.pkl')))
+
+    model.eval()
+    test_pred_list = []
+    test_label_list = []
+    for test_data, test_label in test_dataloader:
+        test_data = test_data.to(device)
+        test_label = test_label.to(device)
+        test_pred = model(test_data)
+        test_pred = F.softmax(test_pred, dim=1)
+        test_pred_list.append(test_pred[:, 1].cpu().detach().numpy())
+        test_label_list.append(test_label.cpu().detach().numpy().astype(int))
+    
+    
+    test_pred = np.concatenate(test_pred_list)
+    test_label = np.concatenate(test_label_list)
+    AUC = roc_auc_score(y_true=test_label, y_score=test_pred)
+    AUPR = average_precision_score(y_true=test_label, y_score=test_pred)
+    AUPR_norm = AUPR/np.mean(test_label)
+    EP, EPR = calculate_ep(test_pred, test_label)
+    # ACC = accuracy_score(y_true=test_label, y_pred=(test_pred>0.5).astype(int))
+    # RECALL = recall_score(y_true=test_label, y_pred=(test_pred>0.5).astype(int))
+    # PRECISION = precision_score(y_true=test_label, y_pred=(test_pred>0.5).astype(int))
+    # F1 = f1_score(y_true=test_label, y_pred=(test_pred>0.5).astype(int))
+    print('Test AUC: {:.3F}'.format(AUC), 'AUPR: {:.3F}'.format(AUPR), 'AUPR_norm: {:.3F}'.format(AUPR_norm), 'EP: {:.3F}'.format(EP), 'EPR: {:.3F}'.format(EPR), flush=True)
+
+
+    # Calculate MACs, Params and Memory Usage
+    inputs = next(iter(train_dataloader))[0][:1].to(device) # batch_size=1
+    macs, params = profile(model, inputs=(inputs, ), verbose=False)
+    print('MACs: {:.3F} G'.format(macs/1024/1024/1024), flush=True)
+    print('Params: {:.3F} M'.format(params/1024/1024), flush=True)
+    print('Memory Usage: {:.3F} GB'.format(torch.cuda.memory_allocated(device)/1024/1024/1024), flush=True)
+
+
+if __name__ == '__main__':
+    # Arguments Parser
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--data_path', type=str, default='../../../Bioinfor-GRNInfer/data/tissue_specific_data/ProcessedData/Human-Blood', help='dataset path')
+    parser.add_argument('--result_path', type=str, default='../result/temp', help='result path')
+    parser.add_argument('--seed', type=int, default=8, help='random seed')
+    parser.add_argument('--cell', type=float, default=5000, help='the cell number')
+    parser.add_argument('--size', type=float, default=1.0, help='the size of training data')
+    args = parser.parse_args()
+
+    # Set random seed
+    seed = args.seed
+    random.seed(args.seed)
+    np.random.seed(args.seed)
+    torch.manual_seed(args.seed)
+
+    # Main
+    os.makedirs(args.result_path, exist_ok=True) # Create result path
+    main(data_path=args.data_path, result_path=args.result_path, cell=args.cell, size=args.size)
+    

@@ -1,0 +1,6 @@
+from .model_2016_PMLR_DEC import benchmark_2016_PMLR_DEC
+from .model_2017_IJCAI_IDEC import benchmark_2017_IJCAI_IDEC
+from .model_2021_INSC_DEMVC import benchmark_2021_INSC_DEMVC, benchmark_2021_INSC_DEMVC_NC
+from .model_2022_TKDE_SDMVC import benchmark_2022_TKDE_SDMVC
+from .model_2024_CVPR_MVCAN import benchmark_2024_CVPR_MVCAN
+from .model_2026_JBHI_HDUMEC import benchmark_2026_JBHI_HDUMEC

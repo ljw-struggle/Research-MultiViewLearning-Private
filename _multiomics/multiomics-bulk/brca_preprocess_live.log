@@ -1,0 +1,73 @@
+
+R version 4.5.1 (2025-06-13) -- "Great Square Root"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(reshape2)
+> library(kableExtra)
+> library(plotly)
+> library(vsn)
+> library(tibble)
+> library(pheatmap)
+> library(SummarizedExperiment)
+> source('./2_data_functions.R')
+> setwd('~/Bioinfor/Bioinfor-MMBEMB-Private/data')
+> 
+> project <- 'BRCA'
+> dataset <- 'TCGA'
+> trait <- 'paper_BRCA_Subtype_PAM50'
+>   
+> # -------------------------------------------------------------------------
+> # META File Generation ----------------------------------------------------
+> # -------------------------------------------------------------------------
+> # The meta data is (typically) located in the coldata of the mRNA gene expression experiment. 
+> load(paste0('./data/TCGA-',project,'/mRNA/mRNA.rda'))
+> # Create coldata and condition table --------------------------------------
+> coldata <- colData(data)
+> datMeta <- as.data.frame(coldata[,c('patient','race' , 'gender' , 'sample_type' , trait)])
+> datMeta <- datMeta[!(is.na(datMeta[[trait]])) , ]
+> datMeta <- datMeta[!(duplicated(datMeta[ , c('patient' , trait)])) , ] 
+> datMeta[[trait]] <- factor(datMeta[[trait]])
+> rownames(datMeta) <- datMeta$patient
+> write.csv(datMeta , file = paste0('./data/TCGA-',project,'/datMeta.csv'))
+> 
+> # -------------------------------------------------------------------------
+> # mRNA pre-processing -----------------------------------------------------
+> # -------------------------------------------------------------------------
+> # Pull in Count Matrices --------------------------------------------------
+> load(paste0('./data/TCGA-',project,'/mRNA/mRNA.rda'))
+> count_mtx <- assay(data)
+> colnames(count_mtx) <- substr(colnames(count_mtx) , 1, 12)
+> count_mtx <- count_mtx[, !(duplicated(colnames(count_mtx)))]
+> 
+> # Pull in Meta File
+> datMeta <- read.csv(paste0('./data/TCGA-',project,'/datMeta.csv') , row.names = 1)
+> 
+> # Get intersection of count and meta
+> common_idx <- intersect(colnames(count_mtx) , rownames(datMeta))
+> count_mtx <- count_mtx[ , common_idx]
+> datMeta <- datMeta[common_idx , ]
+> 
+> # Perform differential expression analysis
+> diff_expr_res <- diff_expr(count_mtx , datMeta , trait , 500 , 'mRNA')
+[1] "Removing 2663 Genes with all 0"
+[1] "keeping 30003 genes"
+[1] "Removing 27994 Genes"
+[1] "removing outliers"
+[1] "Keeping 1045 Samples"
+[1] "Removed 38 Samples"
+[1] "performing DESeq"

@@ -1,0 +1,8 @@
+data
+Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+Homo_sapiens.GRCh38.110.chr.gtf.gz
+Homo_sapiens.GRCh38.dna.primary_assembly.fa
+Homo_sapiens.GRCh38.110.chr.gtf
+extract_genes.fasta
+extract_proteins.fasta
+extract_promoters.fasta

@@ -1,0 +1,14 @@
+{
+  "model_info": {
+    "model_name": "SimpleCNN",
+    "input_shape": [
+      1,
+      3,
+      32,
+      32
+    ],
+    "device": "cpu"
+  },
+  "parameters": "545.098K",
+  "flops": "6.129M"
+}

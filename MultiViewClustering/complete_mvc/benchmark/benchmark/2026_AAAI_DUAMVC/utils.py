@@ -1,0 +1,100 @@
+import os, numpy as np, torch, pandas as pd
+from scipy import sparse
+from torch.utils.data import Dataset
+from scipy.optimize import linear_sum_assignment
+from sklearn.metrics.cluster import contingency_matrix, normalized_mutual_info_score, adjusted_rand_score, silhouette_score
+
+def evaluate(label, pred):
+    nmi = normalized_mutual_info_score(label, pred)
+    ari = adjusted_rand_score(label, pred)
+    acc = clustering_acc(label, pred)
+    pur = purity_score(label, pred)
+    # asw = silhouette_score(embedding, pred) # silhouette score
+    return nmi, ari, acc, pur #, asw
+
+def clustering_acc(y_true, y_pred): # y_pred and y_true are numpy arrays, same shape
+    y_true = y_true.astype(np.int64); y_pred = y_pred.astype(np.int64); assert y_pred.size == y_true.size; 
+    D = max(y_pred.max(), y_true.max()) + 1
+    w = np.array([[sum((y_pred == i) & (y_true == j)) for j in range(D)] for i in range(D)], dtype=np.int64) # shape: (num_pred_clusters, num_true_clusters)
+    ind = linear_sum_assignment(w.max() - w) # align clusters using the Hungarian algorithm, ind[0] is the row indices (predicted clusters), ind[1] is the column indices (true clusters)
+    return sum([w[i][j] for i, j in zip(ind[0], ind[1])]) * 1.0 / y_pred.shape[0] # accuracy
+
+def purity_score(y_true, y_pred):
+    contingency_matrix_result = contingency_matrix(y_true, y_pred) # shape: (num_true_clusters, num_pred_clusters)
+    return np.sum(np.amax(contingency_matrix_result, axis=0)) / np.sum(contingency_matrix_result) 
+
+def load_data(dataset):
+    match dataset:
+        case "BRCA":
+            dataset = MMDataset('./data/data_bulk_multiomics/BRCA/', concat_data=False)
+            dims = dataset.data_features; view = dataset.data_views; data_size = dataset.data_samples; class_num = dataset.categories
+        case "LGG":
+            dataset = MMDataset('./data/data_bulk_multiomics/LGG/', concat_data=False)
+            dims = dataset.data_features; view = dataset.data_views; data_size = dataset.data_samples; class_num = dataset.categories
+        case "KIPAN":
+            dataset = MMDataset('./data/data_bulk_multiomics/KIPAN/', concat_data=False)
+            dims = dataset.data_features; view = dataset.data_views; data_size = dataset.data_samples; class_num = dataset.categories
+        case "TEA":
+            dataset = MMDataset('./data/data_sc_multiomics/TEA/', concat_data=False)
+            dims = dataset.data_features; view = dataset.data_views; data_size = dataset.data_samples; class_num = dataset.categories
+        case "NEAT":
+            dataset = MMDataset('./data/data_sc_multiomics/NEAT/', concat_data=False)
+            dims = dataset.data_features; view = dataset.data_views; data_size = dataset.data_samples; class_num = dataset.categories
+        case "DOGMA":
+            dataset = MMDataset('./data/data_sc_multiomics/DOGMA/', concat_data=False)
+            dims = dataset.data_features; view = dataset.data_views; data_size = dataset.data_samples; class_num = dataset.categories
+        case _:
+            raise NotImplementedError(f"Dataset '{dataset}' is not supported")
+    return dataset, dims, view, data_size, class_num
+
+class MMDataset(Dataset):
+    def __init__(self, data_dir, concat_data=False):
+        # Load the multi-omics data and concatenate the modality-specific features.
+        self.data_dir = data_dir  # Save data_dir as instance variable
+        data_list = []
+        modality_list = ['modality_mrna', 'modality_meth', 'modality_mirna'] if data_dir.find('bulk') != -1 else ['modality_rna', 'modality_protein', 'modality_atac']     
+        for modality in modality_list:
+            modality_data = pd.read_csv(os.path.join(data_dir, modality + '.csv'), header=0, index_col=0) # shape: (num_samples, num_features)
+            modality_data_min = np.min(modality_data.values, axis=0, keepdims=True) # shape: (1, num_features)
+            modality_data_max = np.max(modality_data.values, axis=0, keepdims=True) # shape: (1, num_features)
+            modality_data_values = (modality_data.values - modality_data_min)/(modality_data_max - modality_data_min + 1e-10) # shape: (num_samples, num_features), normalize the data to [0, 1]
+            data_list.append(modality_data_values.astype(float))
+            print('{} shape: {}'.format(modality, modality_data_values.shape))
+        label = modality_data.index.astype(int) # shape: (num_samples, )
+        self.categories = np.unique(label).shape[0]; self.data_samples = data_list[0].shape[0]; # number of categories, number of samples
+        self.data_views = len(data_list); self.data_features = [data_list[v].shape[1] for v in range(self.data_views)] # number of categories, number of views, number of samples, number of features in each view
+        self.concat_data = concat_data
+        if self.concat_data:
+            self.X = [torch.from_numpy(x).float() for x in data_list]; self.Y = torch.tensor(label, dtype=torch.long)
+            self.X = torch.cat(self.X, dim=1) # concatenate the data from different views, shape: (num_samples, sum(num_features))
+        else:
+            self.X = [torch.from_numpy(x).float() for x in data_list]; self.Y = torch.tensor(label, dtype=torch.long)
+
+    def __getitem__(self, index):
+        if self.concat_data:
+            x = self.X[index] # select the data from the index
+            y = self.Y[index] # select the label from the index
+        else:
+            x = [x[index] for x in self.X] # convert to tensor
+            y = self.Y[index] # select the label from the index
+        return x, y, index
+
+    def __len__(self):
+        return len(self.Y)
+    
+    def get_data_info(self):
+        return self.data_views, self.data_samples, self.data_features, self.categories
+    
+    def get_label_to_name(self):
+        if self.data_dir == './data/data_sc_multiomics/TEA/':
+            return {0: 'B.Activated', 1: 'B.Naive', 2: 'DC.Myeloid', 3: 'Mono.CD14', 4: 'Mono.CD16', 5: 'NK', 6: 'Platelets', 7: 'T.CD4.Memory', 8: 'T.CD4.Naive', 9: 'T.CD8.Effector', 10: 'T.CD8.Naive', 11: 'T.DoubleNegative'}
+        if self.data_dir == './data/data_sc_multiomics/NEAT/':
+            return {0: 'C1', 1: 'C2', 2: 'C3', 3: 'C4', 4: 'C5', 5: 'C6', 6: 'C7'}
+        if self.data_dir == './data/data_sc_multiomics/DOGMA/':
+            return {0: 'ASDC', 1: 'B intermediate', 2: 'B memory', 3: 'B naive', 4: 'CD14 Mono', 5: 'CD16 Mono', 6: 'CD4 CTL', 7: 'CD4 Naive', 8: 'CD4 Proliferating', 9: 'CD4 TCM', 10: 'CD4 TEM', 11: 'CD8 Naive', 12: 'CD8 TCM', 13: 'CD8 TEM', 14: 'Eryth', 15: 'HSPC', 16: 'ILC', 17: 'MAIT', 18: 'NK', 19: 'NK_CD56bright', 20: 'Plasmablast', 21: 'Platelet', 22: 'Treg', 23: 'cDC2', 24: 'dnT', 25: 'gdT', 26: 'pDC'}
+        if self.data_dir == './data/data_bulk_multiomics/BRCA/':
+            return {0: 'Normal-like', 1: 'Basal-like', 2: 'HER2-enriched', 3: 'Luminal A', 4: 'Luminal B'}
+        if self.data_dir == './data/data_bulk_multiomics/LGG/':
+            return {0: 'grade II', 1: 'grade III'}
+        if self.data_dir == './data/data_bulk_multiomics/KIPAN/':
+            return {0: 'KICH', 1: 'KIRC', 2: 'KIRP'}

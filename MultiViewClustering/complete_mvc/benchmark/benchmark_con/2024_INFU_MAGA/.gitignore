@@ -1,0 +1,491 @@
+arch/
+data/
+result/
+__pycache__/
+2024_INFU_MAGA.pdf
+
+
+(base) amax@amax:~/lijiawei/Research-MultiViewLearning-Private/MultiViewClustering/benchmark/benchmark_con/2024_INFU_MAGA/arch/MAGA$ python train_MAGA.py 
+ROUND:1
+Epoch 1 Loss:0.425776
+Epoch 2 Loss:0.267714
+Epoch 3 Loss:0.262435
+Epoch 4 Loss:0.261968
+Epoch 5 Loss:0.261526
+Epoch 6 Loss:0.261593
+Epoch 7 Loss:0.261830
+Epoch 8 Loss:0.261755
+Epoch 9 Loss:0.261703
+Epoch 10 Loss:0.261243
+Epoch 11 Loss:0.261348
+Epoch 12 Loss:0.261112
+Epoch 13 Loss:0.261382
+Epoch 14 Loss:0.261373
+Epoch 15 Loss:0.261211
+Epoch 16 Loss:0.261430
+Epoch 17 Loss:0.261782
+Epoch 18 Loss:0.261165
+Epoch 19 Loss:0.261124
+Epoch 20 Loss:0.261250
+Epoch 21 Loss:0.261419
+Epoch 22 Loss:0.261390
+Epoch 23 Loss:0.261102
+Epoch 24 Loss:0.261166
+Epoch 25 Loss:0.261075
+Epoch 26 Loss:0.261132
+Epoch 27 Loss:0.261163
+Epoch 28 Loss:0.261189
+Epoch 29 Loss:0.261186
+Epoch 30 Loss:0.261001
+Epoch 31 Loss:0.260963
+Epoch 32 Loss:0.261367
+Epoch 33 Loss:0.261176
+Epoch 34 Loss:0.261240
+Epoch 35 Loss:0.261056
+Epoch 36 Loss:0.261335
+Epoch 37 Loss:0.261225
+Epoch 38 Loss:0.260972
+Epoch 39 Loss:0.261141
+Epoch 40 Loss:0.261122
+Epoch 41 Loss:0.261024
+Epoch 42 Loss:0.260921
+Epoch 43 Loss:0.261156
+Epoch 44 Loss:0.260975
+Epoch 45 Loss:0.261019
+Epoch 46 Loss:0.261138
+Epoch 47 Loss:0.261012
+Epoch 48 Loss:0.261042
+Epoch 49 Loss:0.261106
+Epoch 50 Loss:0.261327
+Epoch 51 Loss:0.261041
+Epoch 52 Loss:0.261224
+Epoch 53 Loss:0.261060
+Epoch 54 Loss:0.261187
+Epoch 55 Loss:0.261275
+Epoch 56 Loss:0.260969
+Epoch 57 Loss:0.260969
+Epoch 58 Loss:0.261273
+Epoch 59 Loss:0.260937
+Epoch 60 Loss:0.261431
+Epoch 61 Loss:0.261148
+Epoch 62 Loss:0.261370
+Epoch 63 Loss:0.261109
+Epoch 64 Loss:0.261353
+Epoch 65 Loss:0.261054
+Epoch 66 Loss:0.260869
+Epoch 67 Loss:0.261022
+Epoch 68 Loss:0.261154
+Epoch 69 Loss:0.261163
+Epoch 70 Loss:0.261030
+Epoch 71 Loss:0.261140
+Epoch 72 Loss:0.261146
+Epoch 73 Loss:0.261020
+Epoch 74 Loss:0.261008
+Epoch 75 Loss:0.260794
+Epoch 76 Loss:0.261070
+Epoch 77 Loss:0.261028
+Epoch 78 Loss:0.261213
+Epoch 79 Loss:0.261362
+Epoch 80 Loss:0.260978
+Epoch 81 Loss:0.261048
+Epoch 82 Loss:0.260937
+Epoch 83 Loss:0.260945
+Epoch 84 Loss:0.260966
+Epoch 85 Loss:0.261018
+Epoch 86 Loss:0.261048
+Epoch 87 Loss:0.261029
+Epoch 88 Loss:0.260891
+Epoch 89 Loss:0.261075
+Epoch 90 Loss:0.261019
+Epoch 91 Loss:0.261004
+Epoch 92 Loss:0.261321
+Epoch 93 Loss:0.261108
+Epoch 94 Loss:0.260827
+Epoch 95 Loss:0.260967
+Epoch 96 Loss:0.261007
+Epoch 97 Loss:0.260872
+Epoch 98 Loss:0.261002
+Epoch 99 Loss:0.260990
+Epoch 100 Loss:0.260921
+Epoch 101 Loss:0.261126
+Epoch 102 Loss:0.260932
+Epoch 103 Loss:0.261134
+Epoch 104 Loss:0.260908
+Epoch 105 Loss:0.261008
+Epoch 106 Loss:0.260884
+Epoch 107 Loss:0.260922
+Epoch 108 Loss:0.260932
+Epoch 109 Loss:0.260874
+Epoch 110 Loss:0.260931
+Epoch 111 Loss:0.260900
+Epoch 112 Loss:0.260865
+Epoch 113 Loss:0.260935
+Epoch 114 Loss:0.260934
+Epoch 115 Loss:0.260979
+Epoch 116 Loss:0.260921
+Epoch 117 Loss:0.260997
+Epoch 118 Loss:0.260858
+Epoch 119 Loss:0.260849
+Epoch 120 Loss:0.260900
+Epoch 121 Loss:0.260999
+Epoch 122 Loss:0.260880
+Epoch 123 Loss:0.261017
+Epoch 124 Loss:0.260877
+Epoch 125 Loss:0.260941
+Epoch 126 Loss:0.260935
+Epoch 127 Loss:0.260810
+Epoch 128 Loss:0.260871
+Epoch 129 Loss:0.260886
+Epoch 130 Loss:0.260917
+Epoch 131 Loss:0.261050
+Epoch 132 Loss:0.260991
+Epoch 133 Loss:0.261008
+Epoch 134 Loss:0.261119
+Epoch 135 Loss:0.261001
+Epoch 136 Loss:0.261105
+Epoch 137 Loss:0.260942
+Epoch 138 Loss:0.260811
+Epoch 139 Loss:0.260872
+Epoch 140 Loss:0.260955
+Epoch 141 Loss:0.261043
+Epoch 142 Loss:0.260931
+Epoch 143 Loss:0.261000
+Epoch 144 Loss:0.260867
+Epoch 145 Loss:0.260845
+Epoch 146 Loss:0.260812
+Epoch 147 Loss:0.261074
+Epoch 148 Loss:0.261001
+Epoch 149 Loss:0.260992
+Epoch 150 Loss:0.260772
+Epoch 151 Loss:0.260943
+Epoch 152 Loss:0.260975
+Epoch 153 Loss:0.260875
+Epoch 154 Loss:0.260878
+Epoch 155 Loss:0.260835
+Epoch 156 Loss:0.260792
+Epoch 157 Loss:0.260909
+Epoch 158 Loss:0.260784
+Epoch 159 Loss:0.260900
+Epoch 160 Loss:0.260807
+Epoch 161 Loss:0.261070
+Epoch 162 Loss:0.261025
+Epoch 163 Loss:0.261087
+Epoch 164 Loss:0.261019
+Epoch 165 Loss:0.260880
+Epoch 166 Loss:0.260956
+Epoch 167 Loss:0.261030
+Epoch 168 Loss:0.260965
+Epoch 169 Loss:0.260820
+Epoch 170 Loss:0.260768
+Epoch 171 Loss:0.260848
+Epoch 172 Loss:0.260812
+Epoch 173 Loss:0.260828
+Epoch 174 Loss:0.260855
+Epoch 175 Loss:0.260861
+Epoch 176 Loss:0.260750
+Epoch 177 Loss:0.260811
+Epoch 178 Loss:0.260879
+Epoch 179 Loss:0.260885
+Epoch 180 Loss:0.260853
+Epoch 181 Loss:0.260880
+Epoch 182 Loss:0.260775
+Epoch 183 Loss:0.260811
+Epoch 184 Loss:0.260951
+Epoch 185 Loss:0.260928
+Epoch 186 Loss:0.260974
+Epoch 187 Loss:0.260791
+Epoch 188 Loss:0.260970
+Epoch 189 Loss:0.261006
+Epoch 190 Loss:0.260926
+Epoch 191 Loss:0.260962
+Epoch 192 Loss:0.260847
+Epoch 193 Loss:0.260813
+Epoch 194 Loss:0.260837
+Epoch 195 Loss:0.260752
+Epoch 196 Loss:0.260895
+Epoch 197 Loss:0.260776
+Epoch 198 Loss:0.260858
+Epoch 199 Loss:0.260812
+Epoch 200 Loss:0.260976
+ACC = 0.1914 NMI = 0.0789 ARI = -0.0004 PUR=0.2070
+Epoch 201 Loss:105.366383
+Epoch 202 Loss:96.283349
+Epoch 203 Loss:93.320529
+Epoch 204 Loss:90.879832
+Epoch 205 Loss:87.615408
+Epoch 206 Loss:84.588242
+Epoch 207 Loss:82.220806
+Epoch 208 Loss:80.471655
+Epoch 209 Loss:79.166702
+Epoch 210 Loss:78.205646
+Clustering results on semantic labels: 
+ACC = 0.5266 NMI = 0.6962 ARI = 0.4862 PUR=0.5446
+Clustering results on kmeans clustering: 
+ACC = 0.7117 NMI = 0.7645 ARI = 0.6189 PUR=0.7196
+Epoch 211 Loss:77.495381
+Epoch 212 Loss:76.945726
+Epoch 213 Loss:76.459417
+Epoch 214 Loss:76.007173
+Epoch 215 Loss:75.640153
+Epoch 216 Loss:75.210748
+Epoch 217 Loss:74.806667
+Epoch 218 Loss:74.376479
+Epoch 219 Loss:73.912569
+Epoch 220 Loss:73.449835
+Clustering results on semantic labels: 
+ACC = 0.6502 NMI = 0.7757 ARI = 0.6067 PUR=0.6539
+Clustering results on kmeans clustering: 
+ACC = 0.7729 NMI = 0.8070 ARI = 0.6845 PUR=0.7729
+Epoch 221 Loss:72.839426
+Epoch 222 Loss:72.157324
+Epoch 223 Loss:71.377422
+Epoch 224 Loss:70.642806
+Epoch 225 Loss:69.962518
+Epoch 226 Loss:69.423786
+Epoch 227 Loss:69.013174
+Epoch 228 Loss:68.636864
+Epoch 229 Loss:68.331049
+Epoch 230 Loss:68.070704
+Clustering results on semantic labels: 
+ACC = 0.7654 NMI = 0.8246 ARI = 0.6975 PUR=0.7849
+Clustering results on kmeans clustering: 
+ACC = 0.8909 NMI = 0.8836 ARI = 0.8234 PUR=0.8909
+Epoch 231 Loss:67.842783
+Epoch 232 Loss:67.631743
+Epoch 233 Loss:67.441361
+Epoch 234 Loss:67.291495
+Epoch 235 Loss:67.177237
+Epoch 236 Loss:67.064121
+Epoch 237 Loss:66.900684
+Epoch 238 Loss:66.754608
+Epoch 239 Loss:66.639986
+Epoch 240 Loss:66.488433
+Clustering results on semantic labels: 
+ACC = 0.7981 NMI = 0.8590 ARI = 0.7544 PUR=0.7988
+Clustering results on kmeans clustering: 
+ACC = 0.9677 NMI = 0.9419 ARI = 0.9330 PUR=0.9677
+Epoch 241 Loss:66.290815
+Epoch 242 Loss:66.088833
+Epoch 243 Loss:65.876586
+Epoch 244 Loss:65.682576
+Epoch 245 Loss:65.541753
+Epoch 246 Loss:65.452547
+Epoch 247 Loss:65.319681
+Epoch 248 Loss:65.239902
+Epoch 249 Loss:65.132980
+Epoch 250 Loss:65.062908
+Clustering results on semantic labels: 
+ACC = 0.8838 NMI = 0.8966 ARI = 0.8336 PUR=0.8866
+Clustering results on kmeans clustering: 
+ACC = 0.9782 NMI = 0.9551 ARI = 0.9536 PUR=0.9782
+Epoch 251 Loss:65.015865
+Epoch 252 Loss:64.947049
+Epoch 253 Loss:64.900343
+Epoch 254 Loss:64.860929
+Epoch 255 Loss:64.803742
+Epoch 256 Loss:64.746136
+Epoch 257 Loss:64.722338
+Epoch 258 Loss:64.679417
+Epoch 259 Loss:64.621196
+Epoch 260 Loss:64.563101
+Clustering results on semantic labels: 
+ACC = 0.8918 NMI = 0.9087 ARI = 0.8464 PUR=0.8941
+Clustering results on kmeans clustering: 
+ACC = 0.9837 NMI = 0.9637 ARI = 0.9648 PUR=0.9837
+Epoch 261 Loss:64.510304
+Epoch 262 Loss:64.454336
+Epoch 263 Loss:64.336700
+Epoch 264 Loss:64.191062
+Epoch 265 Loss:64.101429
+Epoch 266 Loss:63.980158
+Epoch 267 Loss:63.888488
+Epoch 268 Loss:63.836276
+Epoch 269 Loss:63.787149
+Epoch 270 Loss:63.781036
+Clustering results on semantic labels: 
+ACC = 0.8837 NMI = 0.9040 ARI = 0.8375 PUR=0.8944
+Clustering results on kmeans clustering: 
+ACC = 0.9855 NMI = 0.9662 ARI = 0.9685 PUR=0.9855
+Epoch 271 Loss:63.730433
+Epoch 272 Loss:63.725375
+Epoch 273 Loss:63.684168
+Epoch 274 Loss:63.664671
+Epoch 275 Loss:63.602966
+Epoch 276 Loss:63.630305
+Epoch 277 Loss:63.593169
+Epoch 278 Loss:63.554499
+Epoch 279 Loss:63.529696
+Epoch 280 Loss:63.489710
+Clustering results on semantic labels: 
+ACC = 0.8920 NMI = 0.9139 ARI = 0.8516 PUR=0.8956
+Clustering results on kmeans clustering: 
+ACC = 0.9872 NMI = 0.9698 ARI = 0.9722 PUR=0.9872
+Epoch 281 Loss:63.486348
+Epoch 282 Loss:63.541529
+Epoch 283 Loss:63.491019
+Epoch 284 Loss:63.440352
+Epoch 285 Loss:63.442712
+Epoch 286 Loss:63.430675
+Epoch 287 Loss:63.390162
+Epoch 288 Loss:63.393398
+Epoch 289 Loss:63.376145
+Epoch 290 Loss:63.365361
+Clustering results on semantic labels: 
+ACC = 0.8680 NMI = 0.9151 ARI = 0.8424 PUR=0.8956
+Clustering results on kmeans clustering: 
+ACC = 0.9875 NMI = 0.9704 ARI = 0.9728 PUR=0.9875
+Epoch 291 Loss:63.348638
+Epoch 292 Loss:63.348262
+Epoch 293 Loss:63.354761
+Epoch 294 Loss:63.316687
+Epoch 295 Loss:63.318674
+Epoch 296 Loss:63.306047
+Epoch 297 Loss:63.303467
+Epoch 298 Loss:63.302089
+Epoch 299 Loss:63.298411
+Epoch 300 Loss:63.253426
+Clustering results on semantic labels: 
+ACC = 0.8765 NMI = 0.9273 ARI = 0.8583 PUR=0.8955
+Clustering results on kmeans clustering: 
+ACC = 0.9881 NMI = 0.9715 ARI = 0.9741 PUR=0.9881
+Epoch 301 Loss:63.283752
+Epoch 302 Loss:63.316582
+Epoch 303 Loss:63.284365
+Epoch 304 Loss:63.273652
+Epoch 305 Loss:63.229518
+Epoch 306 Loss:63.247760
+Epoch 307 Loss:63.239541
+Epoch 308 Loss:63.197954
+Epoch 309 Loss:63.187786
+Epoch 310 Loss:63.180433
+Clustering results on semantic labels: 
+ACC = 0.8685 NMI = 0.9336 ARI = 0.8595 PUR=0.8951
+Clustering results on kmeans clustering: 
+ACC = 0.9879 NMI = 0.9709 ARI = 0.9736 PUR=0.9879
+Epoch 311 Loss:63.138057
+Epoch 312 Loss:63.140198
+Epoch 313 Loss:63.140020
+Epoch 314 Loss:63.158844
+Epoch 315 Loss:63.224144
+Epoch 316 Loss:63.143486
+Epoch 317 Loss:63.161921
+Epoch 318 Loss:63.122771
+Epoch 319 Loss:63.122622
+Epoch 320 Loss:63.118913
+Clustering results on semantic labels: 
+ACC = 0.8595 NMI = 0.9313 ARI = 0.8543 PUR=0.8945
+Clustering results on kmeans clustering: 
+ACC = 0.9882 NMI = 0.9715 ARI = 0.9743 PUR=0.9882
+Epoch 321 Loss:63.127158
+Epoch 322 Loss:63.106292
+Epoch 323 Loss:63.186316
+Epoch 324 Loss:63.169841
+Epoch 325 Loss:63.112757
+Epoch 326 Loss:63.125405
+Epoch 327 Loss:63.106891
+Epoch 328 Loss:63.066955
+Epoch 329 Loss:63.090818
+Epoch 330 Loss:63.107612
+Clustering results on semantic labels: 
+ACC = 0.8513 NMI = 0.9332 ARI = 0.8540 PUR=0.8947
+Clustering results on kmeans clustering: 
+ACC = 0.9884 NMI = 0.9718 ARI = 0.9747 PUR=0.9884
+Epoch 331 Loss:63.059955
+Epoch 332 Loss:63.121244
+Epoch 333 Loss:63.111760
+Epoch 334 Loss:63.124393
+Epoch 335 Loss:63.109733
+Epoch 336 Loss:63.072674
+Epoch 337 Loss:63.036027
+Epoch 338 Loss:63.042749
+Epoch 339 Loss:63.038554
+Epoch 340 Loss:63.092781
+Clustering results on semantic labels: 
+ACC = 0.8624 NMI = 0.9335 ARI = 0.8563 PUR=0.8947
+Clustering results on kmeans clustering: 
+ACC = 0.9885 NMI = 0.9722 ARI = 0.9749 PUR=0.9885
+Epoch 341 Loss:63.079695
+Epoch 342 Loss:63.065272
+Epoch 343 Loss:63.052370
+Epoch 344 Loss:63.048650
+Epoch 345 Loss:63.130111
+Epoch 346 Loss:63.114064
+Epoch 347 Loss:63.099022
+Epoch 348 Loss:63.065514
+Epoch 349 Loss:63.075961
+Epoch 350 Loss:63.067398
+Clustering results on semantic labels: 
+ACC = 0.8484 NMI = 0.9323 ARI = 0.8536 PUR=0.8944
+Clustering results on kmeans clustering: 
+ACC = 0.9885 NMI = 0.9721 ARI = 0.9749 PUR=0.9885
+Epoch 351 Loss:63.022043
+Epoch 352 Loss:63.039182
+Epoch 353 Loss:63.007922
+Epoch 354 Loss:63.013372
+Epoch 355 Loss:63.012914
+Epoch 356 Loss:63.004503
+Epoch 357 Loss:62.984136
+Epoch 358 Loss:63.009858
+Epoch 359 Loss:63.027860
+Epoch 360 Loss:63.027879
+Clustering results on semantic labels: 
+ACC = 0.8628 NMI = 0.9328 ARI = 0.8555 PUR=0.8944
+Clustering results on kmeans clustering: 
+ACC = 0.9885 NMI = 0.9721 ARI = 0.9749 PUR=0.9885
+Epoch 361 Loss:63.037324
+Epoch 362 Loss:63.051409
+Epoch 363 Loss:63.075677
+Epoch 364 Loss:63.027230
+Epoch 365 Loss:63.061066
+Epoch 366 Loss:63.028985
+Epoch 367 Loss:63.017227
+Epoch 368 Loss:62.982947
+Epoch 369 Loss:62.997747
+Epoch 370 Loss:63.005673
+Clustering results on semantic labels: 
+ACC = 0.8901 NMI = 0.9431 ARI = 0.8765 PUR=0.8946
+Clustering results on kmeans clustering: 
+ACC = 0.9886 NMI = 0.9722 ARI = 0.9751 PUR=0.9886
+Epoch 371 Loss:63.011790
+Epoch 372 Loss:63.007683
+Epoch 373 Loss:62.987855
+Epoch 374 Loss:62.996603
+Epoch 375 Loss:63.021671
+Epoch 376 Loss:63.021030
+Epoch 377 Loss:63.069412
+Epoch 378 Loss:63.028759
+Epoch 379 Loss:63.003567
+Epoch 380 Loss:62.990557
+Clustering results on semantic labels: 
+ACC = 0.8590 NMI = 0.9328 ARI = 0.8538 PUR=0.8941
+Clustering results on kmeans clustering: 
+ACC = 0.9885 NMI = 0.9720 ARI = 0.9749 PUR=0.9885
+Epoch 381 Loss:63.070657
+Epoch 382 Loss:63.038578
+Epoch 383 Loss:63.001130
+Epoch 384 Loss:62.994508
+Epoch 385 Loss:63.009989
+Epoch 386 Loss:63.026559
+Epoch 387 Loss:63.024243
+Epoch 388 Loss:63.161780
+Epoch 389 Loss:63.066215
+Epoch 390 Loss:63.044386
+Clustering results on semantic labels: 
+ACC = 0.8936 NMI = 0.9453 ARI = 0.8804 PUR=0.8941
+Clustering results on kmeans clustering: 
+ACC = 0.9887 NMI = 0.9725 ARI = 0.9753 PUR=0.9887
+Epoch 391 Loss:62.993970
+Epoch 392 Loss:63.019246
+Epoch 393 Loss:62.999778
+Epoch 394 Loss:62.998565
+Epoch 395 Loss:63.027711
+Epoch 396 Loss:63.045750
+Epoch 397 Loss:62.582115
+Epoch 398 Loss:62.112962
+Epoch 399 Loss:62.085807
+Epoch 400 Loss:62.081286
+Clustering results on semantic labels: 
+ACC = 0.9886 NMI = 0.9723 ARI = 0.9751 PUR=0.9886
+Clustering results on kmeans clustering: 
+ACC = 0.9888 NMI = 0.9727 ARI = 0.9756 PUR=0.9888
+Execution time: 1761.903312921524 seconds

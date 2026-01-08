@@ -1,0 +1,59 @@
+{
+    "name": "debug_sequence_pretrain",
+
+    "seed": 42,
+    "n_gpu": 1,
+    "save_dir": "../result/_debug",
+
+    "model": {
+        "type": "GRNInfer_Branch",
+        "args": {
+            "feature": "bert", 
+            "rnn_mode": "LSTM",
+            "rnn_layer": 3,
+            "rnn_bidirection": true
+        }
+    },
+    "criterion": {
+        "type": "BinaryCrossEntropy",
+        "args": {
+            "alpha": 0.5
+        }
+    },
+    "lr_scheduler": {
+        "type": "StepLR",
+        "args": {
+            "step_size": 1,
+            "gamma": 0.95
+        }
+    },
+    "optimizer": {
+        "type": "Adam",
+        "args":{
+            "lr": 0.001,
+            "weight_decay": 0,
+            "amsgrad": true
+        }
+    },
+    "loader": {
+        "type": "HomoSapiensLoader",
+        "args":{
+            "batch_size": 1024,
+            "shuffle": true,
+            "validation_split": 0.1,
+            "num_workers": 20,
+            "feature": "bert"
+        }
+    },
+    "metrics": ["accuracy", "precision", "recall", "f1"],
+    "trainer": {
+        "verbosity": 2,
+
+        "epochs": 1000,
+        "len_epoch": 2000,
+        "monitor": "min val_loss",
+        "early_stop": 10,
+
+        "tensorboard": true
+    }
+}

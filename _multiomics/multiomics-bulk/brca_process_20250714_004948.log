@@ -1,0 +1,333 @@
+
+R version 4.5.1 (2025-06-13) -- "Great Square Root"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(reshape2)
+> library(kableExtra)
+> library(plotly)
+Loading required package: ggplot2
+
+Attaching package: ‘plotly’
+
+The following object is masked from ‘package:ggplot2’:
+
+    last_plot
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following object is masked from ‘package:graphics’:
+
+    layout
+
+> library(vsn)
+Loading required package: Biobase
+Loading required package: BiocGenerics
+Loading required package: generics
+
+Attaching package: ‘generics’
+
+The following objects are masked from ‘package:base’:
+
+    as.difftime, as.factor, as.ordered, intersect, is.element, setdiff, setequal, union
+
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, sd, var, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, aperm, append, as.data.frame, basename, cbind, colnames, dirname, do.call, duplicated,
+    eval, evalq, Filter, Find, get, grep, grepl, is.unsorted, lapply, Map, mapply, match, mget, order,
+    paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind, Reduce, rownames, sapply, saveRDS, table,
+    tapply, unique, unsplit, which.max, which.min
+
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with 'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+> library(tibble)
+> library(pheatmap)
+> library(SummarizedExperiment)
+Loading required package: MatrixGenerics
+Loading required package: matrixStats
+
+Attaching package: ‘matrixStats’
+
+The following objects are masked from ‘package:Biobase’:
+
+    anyMissing, rowMedians
+
+
+Attaching package: ‘MatrixGenerics’
+
+The following objects are masked from ‘package:matrixStats’:
+
+    colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse, colCounts, colCummaxs, colCummins,
+    colCumprods, colCumsums, colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs, colMads, colMaxs,
+    colMeans2, colMedians, colMins, colOrderStats, colProds, colQuantiles, colRanges, colRanks, colSdDiffs,
+    colSds, colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads, colWeightedMeans,
+    colWeightedMedians, colWeightedSds, colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
+    rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods, rowCumsums, rowDiffs, rowIQRDiffs,
+    rowIQRs, rowLogSumExps, rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins, rowOrderStats,
+    rowProds, rowQuantiles, rowRanges, rowRanks, rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs,
+    rowVars, rowWeightedMads, rowWeightedMeans, rowWeightedMedians, rowWeightedSds, rowWeightedVars
+
+The following object is masked from ‘package:Biobase’:
+
+    rowMedians
+
+Loading required package: GenomicRanges
+Loading required package: stats4
+Loading required package: S4Vectors
+
+Attaching package: ‘S4Vectors’
+
+The following object is masked from ‘package:plotly’:
+
+    rename
+
+The following object is masked from ‘package:utils’:
+
+    findMatches
+
+The following objects are masked from ‘package:base’:
+
+    expand.grid, I, unname
+
+Loading required package: IRanges
+
+Attaching package: ‘IRanges’
+
+The following object is masked from ‘package:plotly’:
+
+    slice
+
+Loading required package: GenomeInfoDb
+> source('./2_data_functions.R')
+Loading required package: Matrix
+
+Attaching package: ‘Matrix’
+
+The following object is masked from ‘package:S4Vectors’:
+
+    expand
+
+Loaded glmnet 4.1-9
+
+Attaching package: ‘igraph’
+
+The following object is masked from ‘package:GenomicRanges’:
+
+    union
+
+The following object is masked from ‘package:IRanges’:
+
+    union
+
+The following object is masked from ‘package:S4Vectors’:
+
+    union
+
+The following object is masked from ‘package:tibble’:
+
+    as_data_frame
+
+The following objects are masked from ‘package:BiocGenerics’:
+
+    normalize, path, union
+
+The following objects are masked from ‘package:generics’:
+
+    components, union
+
+The following object is masked from ‘package:plotly’:
+
+    groups
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:igraph’:
+
+    as_data_frame, groups, union
+
+The following objects are masked from ‘package:GenomicRanges’:
+
+    intersect, setdiff, union
+
+The following object is masked from ‘package:GenomeInfoDb’:
+
+    intersect
+
+The following objects are masked from ‘package:IRanges’:
+
+    collapse, desc, intersect, setdiff, slice, union
+
+The following objects are masked from ‘package:S4Vectors’:
+
+    first, intersect, rename, setdiff, setequal, union
+
+The following object is masked from ‘package:matrixStats’:
+
+    count
+
+The following object is masked from ‘package:Biobase’:
+
+    combine
+
+The following objects are masked from ‘package:BiocGenerics’:
+
+    combine, intersect, setdiff, setequal, union
+
+The following object is masked from ‘package:generics’:
+
+    explain
+
+The following object is masked from ‘package:kableExtra’:
+
+    group_rows
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Loading required package: limma
+
+Attaching package: ‘limma’
+
+The following object is masked from ‘package:DESeq2’:
+
+    plotMA
+
+The following object is masked from ‘package:BiocGenerics’:
+
+    plotMA
+
+Loading required package: dynamicTreeCut
+Loading required package: fastcluster
+
+Attaching package: ‘fastcluster’
+
+The following object is masked from ‘package:stats’:
+
+    hclust
+
+
+
+Attaching package: ‘WGCNA’
+
+The following object is masked from ‘package:IRanges’:
+
+    cor
+
+The following object is masked from ‘package:S4Vectors’:
+
+    cor
+
+The following object is masked from ‘package:stats’:
+
+    cor
+
+> setwd('~/Bioinfor/Bioinfor-MMBEMB-Private/data')
+> 
+> project <- 'BRCA'
+> dataset <- 'TCGA'
+> trait <- 'paper_BRCA_Subtype_PAM50'
+>   
+> # -------------------------------------------------------------------------
+> # META File Generation ----------------------------------------------------
+> # -------------------------------------------------------------------------
+> # The meta data is (typically) located in the coldata of the mRNA gene expression experiment. 
+> load(paste0('./data/TCGA-',project,'/mRNA/mRNA.rda'))
+> # Create coldata and condition table --------------------------------------
+> coldata <- colData(data)
+> datMeta <- as.data.frame(coldata[,c('patient','race' , 'gender' , 'sample_type' , trait)])
+> datMeta <- datMeta[!(is.na(datMeta[[trait]])) , ]
+> datMeta <- datMeta[!(duplicated(datMeta[ , c('patient' , trait)])) , ] 
+> datMeta[[trait]] <- factor(datMeta[[trait]])
+> rownames(datMeta) <- datMeta$patient
+> write.csv(datMeta , file = paste0('./data/TCGA-',project,'/datMeta.csv'))
+> 
+> # -------------------------------------------------------------------------
+> # mRNA pre-processing -----------------------------------------------------
+> # -------------------------------------------------------------------------
+> # Pull in Count Matrices --------------------------------------------------
+> load(paste0('./data/TCGA-',project,'/mRNA/mRNA.rda'))
+> count_mtx <- assay(data)
+> colnames(count_mtx) <- substr(colnames(count_mtx) , 1, 12)
+> count_mtx <- count_mtx[, !(duplicated(colnames(count_mtx)))]
+> 
+> # Pull in Meta File
+> datMeta <- read.csv(paste0('./data/TCGA-',project,'/datMeta.csv') , row.names = 1)
+> 
+> # Get intersection of count and meta
+> common_idx <- intersect(colnames(count_mtx) , rownames(datMeta))
+> count_mtx <- count_mtx[ , common_idx]
+> datMeta <- datMeta[common_idx , ]
+> 
+> # Perform differential expression analysis
+> diff_expr_res <- diff_expr(count_mtx , datMeta , trait , 500 , 'mRNA')
+[1] "Removing 2663 Genes with all 0"
+[1] "keeping 30003 genes"
+[1] "Removing 27994 Genes"
+[1] "removing outliers"
+[1] "Keeping 1045 Samples"
+[1] "Removed 38 Samples"
+[1] "performing DESeq"
+estimating size factors
+estimating dispersions
+gene-wise dispersion estimates
+mean-dispersion relationship
+final dispersion estimates
+fitting model and testing
+-- replacing outliers and refitting for 2936 genes
+-- DESeq argument 'minReplicatesForReplace' = 7 
+-- original counts are preserved in counts(dds)
+estimating dispersions
+fitting model and testing
+> 
+> # Save differential expression results (only 500 genes)
+> datExpr <- diff_expr_res$datExpr
+> datMeta <- diff_expr_res$datMeta
+> dds <- diff_expr_res$dds
+> top_genes <- diff_expr_res$top_genes
+> save(datExpr, datMeta, dds, top_genes, file=paste0('./data/',dataset,'/',project,'/mRNA_processed.RData'))
+Error in gzfile(file, "wb") : cannot open the connection
+Calls: save -> gzfile
+In addition: Warning message:
+In gzfile(file, "wb") :
+  cannot open compressed file './data/TCGA/BRCA/mRNA_processed.RData', probable reason 'No such file or directory'
+Execution halted

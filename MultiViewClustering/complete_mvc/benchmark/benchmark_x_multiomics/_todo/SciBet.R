@@ -1,0 +1,66 @@
+suppressMessages(library(ggplot2))
+suppressMessages(library(tidyverse))
+suppressMessages(library(scibetR))
+suppressMessages(library(viridis))
+suppressMessages(library(ggsci))
+library(MLmetrics)
+library(Seurat)
+# library(SeuratDisk)
+library(ggplot2)
+library(patchwork)
+# data <- read.csv("D:/Desktop/R_script/data/neat/rna_count_.csv", header = 1)
+# lbls <- read.csv("D:/Desktop/R_script/data/neat/labels.csv", header = 1)
+data <- read.csv("D:/Desktop/R_script/fts_hvg.csv", header = 1)
+lbls <- read.csv("D:/Desktop/R_script/lbls.csv", header = 1)
+data <- data[, 2:3000]
+print(data)
+# data <- read.csv("D:/Desktop/R_script/data/raw_rna_hvg_dogma.csv", header = 1)
+# lbls <- read.csv("D:/Desktop/R_script/data/dogma_raw_data_lbls_new.csv", header = 1)
+# data <- data[,2:51]
+# data <- read.csv("D:/Desktop/R_script/data/raw_rna_hvg_tea.csv", header = 1)
+# lbls <- read.csv("D:/Desktop/R_script/data/tea_raw_data_lbls.csv", header = 1)
+# data <- data[,2:51]
+print(dim(data))
+data$label <- lbls$cell_type
+# Seurat_object <- readRDS("D:/Desktop/R_script/data/PBMC-TEA.Rds")
+# path_da <- "~/data/PBMC-TEA.Rds"
+# data <- readr::read_rds(path = path_da) 
+# print(Seurat_object)
+# print(Seurat_object$celltype)
+print('--------here1----------')
+# data <- t(as.matrix(Seurat_object[["RNA"]]@counts))
+# print(dim(data))
+# print(data[1:10,])
+# print(nrow(data))
+print('----------here1-2-------------')
+# data <- read.csv("D:/Desktop/R_script/data/rna_dogma.csv", header = 1)
+# lbls <- read.csv("D:/Desktop/R_script/data/dogma_raw_data_lbls.csv", header = 1)
+# data <- data[,2:51]
+# data$label <- Seurat_object$celltype
+# print(data[1:10,])
+print('-----------here2----------')
+tibble(ID = 1:nrow(data),label = lbls$cell_type) %>% dplyr::sample_frac(0.01) %>% dplyr::pull(ID) -> ID
+
+print('---------here3---------')
+train_set <- data[ID, ]      #construct reference set
+test_set <- data[-ID, ]      #construct query set
+
+print('---------here4---------')
+print(dim(train_set))
+print(dim(test_set))
+prd <- SciBet_R(train_set, test_set[,-ncol(test_set)],k=2500)
+print('---------------')
+# print(prd)
+print('finished training')
+# write.csv(prd,"D:/Desktop/R_script/data/neat/y_pred_0.1.csv")
+# write.csv(test_set$label,"D:/Desktop/R_script/data/neat/y_test_0.1.csv")
+# write.csv(prd,"D:/Desktop/R_script/data/tea/y_pred.csv")
+# write.csv(test_set$label,"D:/Desktop/R_script/data/tea/y_test.csv")
+# y_true <- as.character(query_data$celltype)
+# y_pred <- as.character(query_data$predicted.id)
+# print(table(y_true, y_pred))
+acc <- Accuracy(test_set$label, prd)
+# f1 <- F1_Score_macro(test_set$label, prd)
+# f1w <- F1_Score_macro_weighted(test_set$label, prd)
+print(acc)
+# print(f1w)

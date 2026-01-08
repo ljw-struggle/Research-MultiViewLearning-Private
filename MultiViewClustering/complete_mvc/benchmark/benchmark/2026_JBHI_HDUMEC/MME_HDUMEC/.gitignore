@@ -1,0 +1,7 @@
+data/
+mnist/
+figure/
+result/
+__pycache__/
+public/
+*.log
